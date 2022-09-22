@@ -12,10 +12,11 @@ const DEBOUNCE_DELAY = 300;
 inputEl.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(event) {
+  clearMarkup(countiesListContainer);
+  clearMarkup(countyContainer);
+
   fetchCountries(event.target.value.trim())
     .then(data => {
-      clearMarkup(countiesListContainer);
-      clearMarkup(countyContainer);
       if (data.length === 0) {
         return;
       }
@@ -65,6 +66,5 @@ function renderCountriesList(data) {
           </li>`;
     })
     .join('');
-  console.log(data);
   countiesListContainer.insertAdjacentHTML('beforeend', markup);
 }
