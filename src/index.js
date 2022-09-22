@@ -14,12 +14,12 @@ inputEl.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 function onInput(event) {
   clearMarkup(countiesListContainer);
   clearMarkup(countyContainer);
-
-  fetchCountries(event.target.value.trim())
+  const inputValue = event.target.value.trim();
+  if (!inputValue) {
+    return;
+  }
+  fetchCountries(inputValue)
     .then(data => {
-      if (data.length === 0) {
-        return;
-      }
       if (data.length === 1) {
         renderSingleCountry(data);
       }
